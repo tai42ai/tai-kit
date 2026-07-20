@@ -16,8 +16,8 @@ from pydantic import SecretStr
 
 pytest.importorskip("langgraph")
 
-from tai_kit.llm import embedding, models
-from tai_kit.llm._secret_kwargs import KwargsCacheKey, unwrap_secret_kwargs
+from tai42_kit.llm import embedding, models
+from tai42_kit.llm._secret_kwargs import KwargsCacheKey, unwrap_secret_kwargs
 
 # (provider, fake module name, class attribute the branch imports)
 _LLM_PROVIDERS = [

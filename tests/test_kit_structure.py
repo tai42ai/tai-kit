@@ -1,4 +1,4 @@
-"""Structural gates: the leaf rule (kit imports only tai_contract) and the
+"""Structural gates: the leaf rule (kit imports only tai42_contract) and the
 eviction of app/deployment settings that are not leaf."""
 
 from __future__ import annotations
@@ -6,9 +6,9 @@ from __future__ import annotations
 import ast
 from pathlib import Path
 
-import tai_kit
+import tai42_kit
 
-_SRC = Path(tai_kit.__path__[0])
+_SRC = Path(tai42_kit.__path__[0])
 
 _EVICTED = (
     "BackendSettings",
@@ -38,7 +38,7 @@ def test_leaf_rule_imports_only_tai_contract():
             )
             for name in names:
                 top = name.split(".")[0]
-                if top.startswith("tai_") and top not in ("tai_kit", "tai_contract"):
+                if top.startswith("tai42_") and top not in ("tai42_kit", "tai42_contract"):
                     offenders.append(f"{path.name}: {name}")
     assert not offenders, offenders
 

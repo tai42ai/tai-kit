@@ -1,6 +1,6 @@
 import hashlib
 
-from tai_kit.utils.data.string_util import hash_api_key, snake_to_pascal, text_to_md5
+from tai42_kit.utils.data.string_util import hash_api_key, snake_to_pascal, text_to_md5
 
 
 class TestHashApiKey:

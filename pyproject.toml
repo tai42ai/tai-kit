@@ -3,7 +3,7 @@ requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tai-kit"
+name = "tai42-kit"
 version = "0.1.0"
 description = "Generic leaf helpers, settings primitives, pooled clients, and LLM/AI factories for the TAI ecosystem."
 readme = "README.md"
@@ -24,7 +24,7 @@ classifiers = [
 ]
 dependencies = [
     # The pure interface contract — kit's only tai-* dependency (leaf rule).
-    "tai-contract>=0.1,<0.2",
+    "tai42-contract>=0.1,<0.2",
     "pydantic>=2.12",
     "pydantic-settings>=2.11",
     "python-dotenv>=1.0",
@@ -53,7 +53,7 @@ Issues = "https://github.com/tai42ai/tai-kit/issues"
 Changelog = "https://github.com/tai42ai/tai-kit/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
-# The LLM stack (tai_kit.llm + tai_kit.utils.lc) — everything LangChain-shaped
+# The LLM stack (tai42_kit.llm + tai42_kit.utils.lc) — everything LangChain-shaped
 # is opt-in so the bare install stays a light leaf kit. openai + redis ship
 # inside this extra because they are the default llm/embedding and
 # checkpoint/store providers (llm/settings.py). langgraph-checkpoint-redis
@@ -77,13 +77,13 @@ uvicorn = ["uvicorn>=0.43"]
 
 # LLM provider backends — imported lazily by llm/models.py and llm/embedding.py
 # inside the per-provider match branches. Each pulls the llm base stack.
-anthropic = ["tai-kit[llm]", "langchain-anthropic>=1.4"]
-mistral = ["tai-kit[llm]", "langchain-mistralai>=1.1"]
-google = ["tai-kit[llm]", "langchain-google-genai>=4.2"]
-xai = ["tai-kit[llm]", "langchain-xai>=1.2"]
-ollama = ["tai-kit[llm]", "langchain-ollama>=1.0"]
+anthropic = ["tai42-kit[llm]", "langchain-anthropic>=1.4"]
+mistral = ["tai42-kit[llm]", "langchain-mistralai>=1.1"]
+google = ["tai42-kit[llm]", "langchain-google-genai>=4.2"]
+xai = ["tai42-kit[llm]", "langchain-xai>=1.2"]
+ollama = ["tai42-kit[llm]", "langchain-ollama>=1.0"]
 huggingface = [
-    "tai-kit[llm]",
+    "tai42-kit[llm]",
     "langchain-huggingface>=1.2",
     "sentence-transformers>=5.3",
 ]
@@ -91,17 +91,17 @@ huggingface = [
 # Checkpoint/store backends — imported lazily by llm/checkpoint/checkpoint.py and
 # llm/store/store.py inside the per-backend match branches.
 langgraph-checkpoint-postgres = [
-    "tai-kit[llm]",
+    "tai42-kit[llm]",
     "langgraph-checkpoint-postgres>=3.0.5",
     "psycopg[pool]>=3.3.2",
 ]
 langgraph-checkpoint-sqlite = [
-    "tai-kit[llm]",
+    "tai42-kit[llm]",
     "langgraph-checkpoint-sqlite>=3.0.3",
     "aiosqlite>=0.20",
 ]
 
-# Pooled-client backends — each client submodule (tai_kit.clients.*) imports its
+# Pooled-client backends — each client submodule (tai42_kit.clients.*) imports its
 # driver at module top, so install the matching extra to use that client.
 redis = ["redis>=5"]
 curl = ["curl-cffi>=0.7"]
@@ -125,10 +125,10 @@ package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["tai_kit*"]
+include = ["tai42_kit*"]
 
 [tool.setuptools.package-data]
-tai_kit = ["py.typed"]
+tai42_kit = ["py.typed"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
@@ -141,7 +141,7 @@ xfail_strict = true
 filterwarnings = ["error"]
 
 [tool.coverage.run]
-source = ["tai_kit"]
+source = ["tai42_kit"]
 
 [tool.coverage.report]
 fail_under = 97
@@ -149,6 +149,12 @@ fail_under = 97
 [tool.uv]
 cache-keys = [{ file = "pyproject.toml" }]
 
+
+# The version floors in [project] are the compatibility contract; these path
+# sources resolve the sibling checkouts while the packages are unpublished.
+# They are not part of wheel metadata.
+[tool.uv.sources]
+tai42-contract = { path = "../tai-contract", editable = true }
 [tool.ruff]
 src = ["src"]
 target-version = "py313"
@@ -158,7 +164,7 @@ line-length = 120
 select = ["E", "W", "F", "I", "UP", "B", "C4", "SIM", "PIE", "PT", "RUF", "TID"]
 
 [tool.ruff.lint.flake8-tidy-imports.banned-api]
-"tai_skeleton".msg = "tai-kit sits below the skeleton: it never imports tai-skeleton."
+"tai42_skeleton".msg = "tai42-kit sits below the skeleton: it never imports tai42-skeleton."
 
 [tool.pyright]
 include = ["src", "tests"]

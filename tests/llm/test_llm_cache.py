@@ -12,7 +12,7 @@ pytest.importorskip("langgraph")
 
 from pydantic import SecretStr
 
-from tai_kit.llm import embedding, models
+from tai42_kit.llm import embedding, models
 
 
 def test_get_llm_same_kwargs_builds_once(monkeypatch):

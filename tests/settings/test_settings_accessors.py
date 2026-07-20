@@ -7,11 +7,11 @@ import pytest
 
 pytest.importorskip("langgraph")
 
-from tai_kit.clients.settings import ClientSettings, MCPClientSettings, mcp_client_settings
-from tai_kit.llm import settings as llm_settings_mod
-from tai_kit.logging.settings import LoggingSettings, logging_settings
-from tai_kit.settings.cache_registry import reset_all_settings
-from tai_kit.utils.data.jq_util import JqSettings, jq_settings
+from tai42_kit.clients.settings import ClientSettings, MCPClientSettings, mcp_client_settings
+from tai42_kit.llm import settings as llm_settings_mod
+from tai42_kit.logging.settings import LoggingSettings, logging_settings
+from tai42_kit.settings.cache_registry import reset_all_settings
+from tai42_kit.utils.data.jq_util import JqSettings, jq_settings
 
 
 @pytest.fixture(autouse=True)

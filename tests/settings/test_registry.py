@@ -9,9 +9,9 @@ from pydantic import AliasChoices, AliasPath, Field, SecretStr
 from pydantic.fields import FieldInfo
 from pydantic_settings import SettingsConfigDict
 
-from tai_kit.clients.settings import RedisConnectionSettings
-from tai_kit.settings import TaiBaseSettings, registered_settings
-from tai_kit.settings.registry import (
+from tai42_kit.clients.settings import RedisConnectionSettings
+from tai42_kit.settings import TaiBaseSettings, registered_settings
+from tai42_kit.settings.registry import (
     _clear_registry,
     _factory_needs_validated_data,
     _register,

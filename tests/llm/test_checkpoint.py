@@ -16,8 +16,8 @@ import pytest
 
 pytest.importorskip("langgraph")
 
-from tai_kit.llm.checkpoint import checkpoint as cp
-from tai_kit.llm.checkpoint.checkpoint_registry import CheckpointRegistry
+from tai42_kit.llm.checkpoint import checkpoint as cp
+from tai42_kit.llm.checkpoint.checkpoint_registry import CheckpointRegistry
 
 
 # --------------------------------------------------------------------------- #
@@ -335,9 +335,9 @@ async def test_registry_caches_resource_per_key(monkeypatch):
         creates.append((provider, conn_string))
         return (f"res-{conn_string}", lambda: None)
 
-    monkeypatch.setattr("tai_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _fake_create)
+    monkeypatch.setattr("tai42_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _fake_create)
     monkeypatch.setattr(
-        "tai_kit.llm.checkpoint.checkpoint_registry.get_saver_from_resource",
+        "tai42_kit.llm.checkpoint.checkpoint_registry.get_saver_from_resource",
         lambda provider, resource: resource,
     )
 
@@ -400,7 +400,7 @@ async def test_get_after_close_closes_new_resource_and_raises(monkeypatch):
     async def _fake_create(provider, conn_string):
         return (object(), _closer)
 
-    monkeypatch.setattr("tai_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _fake_create)
+    monkeypatch.setattr("tai42_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _fake_create)
 
     reg = CheckpointRegistry()
     await reg.close_all()
@@ -420,9 +420,9 @@ async def test_registry_concurrent_first_use_creates_once(monkeypatch):
         await asyncio.sleep(0.01)  # hold the create lock so the sibling waits
         return ("res", lambda: None)
 
-    monkeypatch.setattr("tai_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _slow_create)
+    monkeypatch.setattr("tai42_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _slow_create)
     monkeypatch.setattr(
-        "tai_kit.llm.checkpoint.checkpoint_registry.get_saver_from_resource",
+        "tai42_kit.llm.checkpoint.checkpoint_registry.get_saver_from_resource",
         lambda provider, resource: resource,
     )
 
@@ -435,7 +435,7 @@ async def test_registry_concurrent_first_use_creates_once(monkeypatch):
 
 
 def test_checkpoint_registry_singleton_per_loop():
-    from tai_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
+    from tai42_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
 
     async def _pair():
         return checkpoint_registry(), checkpoint_registry()
@@ -457,13 +457,13 @@ def test_checkpoint_registry_usable_across_event_loops(monkeypatch):
         creates.append((provider, conn_string))
         return (f"res-{conn_string}", None)
 
-    monkeypatch.setattr("tai_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _fake_create)
+    monkeypatch.setattr("tai42_kit.llm.checkpoint.checkpoint_registry.create_checkpoint_resource", _fake_create)
     monkeypatch.setattr(
-        "tai_kit.llm.checkpoint.checkpoint_registry.get_saver_from_resource",
+        "tai42_kit.llm.checkpoint.checkpoint_registry.get_saver_from_resource",
         lambda provider, resource: resource,
     )
 
-    from tai_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
+    from tai42_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
 
     async def _use(conn):
         return await checkpoint_registry().get_checkpointer("memory", conn)
@@ -475,7 +475,7 @@ def test_checkpoint_registry_usable_across_event_loops(monkeypatch):
 
 
 async def test_checkpoint_registry_accessor_rebuilds_after_close_all():
-    from tai_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
+    from tai42_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
 
     reg = checkpoint_registry()
     await reg.close_all()
@@ -487,8 +487,8 @@ async def test_checkpoint_registry_accessor_rebuilds_after_close_all():
 
 
 async def test_checkpoint_registry_settings_reset_drops_registry():
-    from tai_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
-    from tai_kit.settings import reset_all_settings
+    from tai42_kit.llm.checkpoint.checkpoint_registry import checkpoint_registry
+    from tai42_kit.settings import reset_all_settings
 
     reg = checkpoint_registry()
     reset_all_settings()
@@ -498,8 +498,8 @@ async def test_checkpoint_registry_settings_reset_drops_registry():
 
 
 async def test_checkpoint_registry_settings_reset_raises_on_live_resource(monkeypatch):
-    from tai_kit.llm.checkpoint import checkpoint_registry as reg_mod
-    from tai_kit.settings import reset_all_settings
+    from tai42_kit.llm.checkpoint import checkpoint_registry as reg_mod
+    from tai42_kit.settings import reset_all_settings
 
     async def _fake_create(provider, conn_string):
         async def _closer():

@@ -1,6 +1,6 @@
 import pytest
 
-from tai_kit.utils.runtime.schedule_util import normalize_schedule, parse_crontab_expr
+from tai42_kit.utils.runtime.schedule_util import normalize_schedule, parse_crontab_expr
 
 
 class TestParseCrontabExpr:

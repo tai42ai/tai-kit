@@ -4,7 +4,7 @@ pytest.importorskip("langgraph")
 
 from pydantic import ValidationError
 
-from tai_kit.llm.settings import ContextOverflowSettings
+from tai42_kit.llm.settings import ContextOverflowSettings
 
 
 class TestContextOverflowMethodsValidator:

@@ -9,12 +9,12 @@ schema describes — real behavior, not shape trivia.
 import pytest
 from pydantic import BaseModel, ValidationError
 
-from tai_kit.utils.data.json_schema_util import (
+from tai42_kit.utils.data.json_schema_util import (
     InvalidJsonSchemaError,
     JsonSchemaValidationError,
     validate_against_json_schema,
 )
-from tai_kit.utils.data.json_schema_util import json_schema_to_pydantic_model as build
+from tai42_kit.utils.data.json_schema_util import json_schema_to_pydantic_model as build
 
 
 def test_scalar_types_map():

@@ -3,7 +3,7 @@ from typing import Any
 
 from fastmcp import Context
 
-from tai_kit.utils.lc.signature_util import (
+from tai42_kit.utils.lc.signature_util import (
     add_signature_params,
     exclude_fastmcp_ctx_from_kwargs,
 )

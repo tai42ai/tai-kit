@@ -12,7 +12,7 @@ pytest.importorskip("langgraph")
 
 from pydantic import SecretStr
 
-from tai_kit.llm._secret_kwargs import KwargsCacheKey, unwrap_secret_kwargs
+from tai42_kit.llm._secret_kwargs import KwargsCacheKey, unwrap_secret_kwargs
 
 
 def test_nested_secret_not_in_key_plaintext():

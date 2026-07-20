@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from tai_kit.utils.data.yaml_util import (
+from tai42_kit.utils.data.yaml_util import (
     dump_manifest,
     load_manifest,
     merge_and_dump_manifest,

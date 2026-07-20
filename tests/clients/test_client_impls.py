@@ -16,10 +16,10 @@ from pydantic import SecretStr
 
 # httpx/fastmcp ride on base deps and import unconditionally; redis/curl/postgres
 # are loaded lazily in their sections via importorskip.
-from tai_kit.clients.impl import http as http_mod
-from tai_kit.clients.impl import mcp as mcp_mod
-from tai_kit.clients.settings import PostgresConnectionSettings, RedisConnectionSettings
-from tai_kit.settings.cache_registry import reset_all_settings
+from tai42_kit.clients.impl import http as http_mod
+from tai42_kit.clients.impl import mcp as mcp_mod
+from tai42_kit.clients.settings import PostgresConnectionSettings, RedisConnectionSettings
+from tai42_kit.settings.cache_registry import reset_all_settings
 
 if TYPE_CHECKING:
     # Type-only: the runtime handle comes from the importorskip helper below, and
@@ -87,7 +87,7 @@ async def test_httpx_close_calls_aclose(monkeypatch):
 # ---------------------------------------------------------------------------
 def _redis_mod():
     pytest.importorskip("redis")
-    return importlib.import_module("tai_kit.clients.impl.redis")
+    return importlib.import_module("tai42_kit.clients.impl.redis")
 
 
 def test_redis_validate_url_errors():
@@ -320,7 +320,7 @@ def test_mcp_runtime_error_matched_by_message_only():
 # ---------------------------------------------------------------------------
 def _curl_mod():
     pytest.importorskip("curl_cffi")
-    return importlib.import_module("tai_kit.clients.impl.curl")
+    return importlib.import_module("tai42_kit.clients.impl.curl")
 
 
 async def test_curl_create_strips_session_key_and_builds_session(monkeypatch):
@@ -391,7 +391,7 @@ def test_curl_runtime_error_matched_by_message_only():
 # ---------------------------------------------------------------------------
 def _pg_mod():
     pytest.importorskip("psycopg_pool")
-    return importlib.import_module("tai_kit.clients.impl.postgres")
+    return importlib.import_module("tai42_kit.clients.impl.postgres")
 
 
 async def test_pg_create_requires_dsn():

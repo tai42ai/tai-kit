@@ -9,9 +9,9 @@ module-global, class-keyed pool from leaking state across tests.
 import asyncio
 
 import pytest
-from tai_contract.errors import ClientDisconnectedError
+from tai42_contract.errors import ClientDisconnectedError
 
-from tai_kit.clients import ClientSettings, PooledClient, client_ctx, shutdown_all_clients
+from tai42_kit.clients import ClientSettings, PooledClient, client_ctx, shutdown_all_clients
 
 
 class _Conn:

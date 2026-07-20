@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from tai_kit.plugins import (
+from tai42_kit.plugins import (
     MAX_PLUGIN_SPEC_BYTES,
     PLUGIN_SPEC_FILENAME,
     PluginSpecLoadError,
@@ -24,7 +24,7 @@ _VALID_SPEC = """\
 spec_version: 1
 namespace: tai42
 name: toolbox
-package: tai-toolbox
+package: tai42-toolbox
 version: 0.1.0
 description: "Generic tools and tool extensions."
 license: Apache-2.0
@@ -37,7 +37,7 @@ permissions:
 provides:
   - kind: tool
     name: generate_uuid
-    module: tai_toolbox.tools.generate_uuid
+    module: tai42_toolbox.tools.generate_uuid
     description: "Generate a random UUID."
     tags: [uuid]
 """
@@ -52,7 +52,7 @@ def _write_spec(tmp_path: Path, text: str) -> Path:
 def test_load_plugin_spec_returns_a_validated_spec(tmp_path: Path):
     spec = load_plugin_spec(_write_spec(tmp_path, _VALID_SPEC))
     assert spec.ref == "tai42/toolbox"
-    assert spec.provides[0].module == "tai_toolbox.tools.generate_uuid"
+    assert spec.provides[0].module == "tai42_toolbox.tools.generate_uuid"
 
 
 def test_load_missing_file_raises_load_error(tmp_path: Path):
@@ -86,7 +86,7 @@ def test_parse_plugin_spec_validates_in_memory_bytes():
 
 
 def _write_wheel(tmp_path: Path, entries: dict[str, str]) -> Path:
-    wheel = tmp_path / "tai_toolbox-0.1.0-py3-none-any.whl"
+    wheel = tmp_path / "tai42_toolbox-0.1.0-py3-none-any.whl"
     with zipfile.ZipFile(wheel, "w") as zf:
         for name, content in entries.items():
             zf.writestr(name, content)
@@ -104,31 +104,31 @@ def _write_deflate_wheel(tmp_path: Path, content: bytes, *, lie_size: int | None
     """
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr(f"tai_toolbox/{PLUGIN_SPEC_FILENAME}", content)
+        zf.writestr(f"tai42_toolbox/{PLUGIN_SPEC_FILENAME}", content)
     raw = bytearray(buf.getvalue())
     if lie_size is not None:
         central = raw.find(b"PK\x01\x02")
         struct.pack_into("<I", raw, central + 24, lie_size)  # central dir uncompressed size
         local = raw.find(b"PK\x03\x04")
         struct.pack_into("<I", raw, local + 22, lie_size)  # local header uncompressed size
-    wheel = tmp_path / "tai_toolbox-0.1.0-py3-none-any.whl"
+    wheel = tmp_path / "tai42_toolbox-0.1.0-py3-none-any.whl"
     wheel.write_bytes(bytes(raw))
     return wheel
 
 
 def test_read_wheel_plugin_spec_reads_the_packaged_copy(tmp_path: Path):
-    wheel = _write_wheel(tmp_path, {f"tai_toolbox/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
-    assert read_wheel_plugin_spec(wheel).package == "tai-toolbox"
+    wheel = _write_wheel(tmp_path, {f"tai42_toolbox/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
+    assert read_wheel_plugin_spec(wheel).package == "tai42-toolbox"
 
 
 def test_read_wheel_finds_a_nested_packaged_copy(tmp_path: Path):
     # Namespace-packaged plugins ship the spec deeper than one directory.
-    wheel = _write_wheel(tmp_path, {f"tai_toolbox/nested/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
+    wheel = _write_wheel(tmp_path, {f"tai42_toolbox/nested/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
     assert read_wheel_plugin_spec(wheel).ref == "tai42/toolbox"
 
 
 def test_read_wheel_without_spec_raises(tmp_path: Path):
-    wheel = _write_wheel(tmp_path, {"tai_toolbox/py.typed": ""})
+    wheel = _write_wheel(tmp_path, {"tai42_toolbox/py.typed": ""})
     with pytest.raises(PluginSpecLoadError, match="contains no"):
         read_wheel_plugin_spec(wheel)
 
@@ -150,7 +150,7 @@ def test_read_wheel_on_a_non_zip_raises(tmp_path: Path):
 
 
 def test_read_wheel_invalid_yaml_raises_load_error(tmp_path: Path):
-    wheel = _write_wheel(tmp_path, {f"tai_toolbox/{PLUGIN_SPEC_FILENAME}": "spec_version: [unclosed"})
+    wheel = _write_wheel(tmp_path, {f"tai42_toolbox/{PLUGIN_SPEC_FILENAME}": "spec_version: [unclosed"})
     with pytest.raises(PluginSpecLoadError, match="not valid YAML"):
         read_wheel_plugin_spec(wheel)
 
@@ -262,9 +262,9 @@ def test_read_wheel_deflate_bomb_with_lying_size_stays_bounded(tmp_path: Path):
 
 def _write_compressed_wheel(tmp_path: Path, content: bytes, compression: int) -> Path:
     """Write a wheel whose spec member uses ``compression`` for its stream."""
-    wheel = tmp_path / "tai_toolbox-0.1.0-py3-none-any.whl"
+    wheel = tmp_path / "tai42_toolbox-0.1.0-py3-none-any.whl"
     with zipfile.ZipFile(wheel, "w", compression=compression) as zf:
-        zf.writestr(f"tai_toolbox/{PLUGIN_SPEC_FILENAME}", content)
+        zf.writestr(f"tai42_toolbox/{PLUGIN_SPEC_FILENAME}", content)
     return wheel
 
 
@@ -307,7 +307,7 @@ def _write_corrupted_deflate_wheel(tmp_path: Path, content: bytes) -> Path:
     """
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr(f"tai_toolbox/{PLUGIN_SPEC_FILENAME}", content)
+        zf.writestr(f"tai42_toolbox/{PLUGIN_SPEC_FILENAME}", content)
     raw = bytearray(buf.getvalue())
     local = raw.find(b"PK\x03\x04")
     name_len = struct.unpack_from("<H", raw, local + 26)[0]
@@ -315,7 +315,7 @@ def _write_corrupted_deflate_wheel(tmp_path: Path, content: bytes) -> Path:
     data_start = local + 30 + name_len + extra_len
     for i in range(data_start + 3, data_start + 13):
         raw[i] ^= 0xFF
-    wheel = tmp_path / "tai_toolbox-0.1.0-py3-none-any.whl"
+    wheel = tmp_path / "tai42_toolbox-0.1.0-py3-none-any.whl"
     wheel.write_bytes(bytes(raw))
     return wheel
 
@@ -335,7 +335,7 @@ def test_read_wheel_encrypted_member_raises(tmp_path: Path, monkeypatch: pytest.
     # An encrypted member surfaces as RuntimeError when the member is opened,
     # which is not a subclass of (BadZipFile, OSError) but still means
     # "unreadable" — the reader opens the member for the bounded read.
-    wheel = _write_wheel(tmp_path, {f"tai_toolbox/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
+    wheel = _write_wheel(tmp_path, {f"tai42_toolbox/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
 
     def _encrypted(self: zipfile.ZipFile, name: str, *args: object, **kwargs: object) -> object:
         raise RuntimeError("File is encrypted, password required for extraction")
@@ -349,7 +349,7 @@ def test_read_wheel_unsupported_compression_raises(tmp_path: Path, monkeypatch: 
     # An unsupported compression method surfaces as NotImplementedError when the
     # member is opened, also outside (BadZipFile, OSError) yet still an
     # unreadable archive.
-    wheel = _write_wheel(tmp_path, {f"tai_toolbox/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
+    wheel = _write_wheel(tmp_path, {f"tai42_toolbox/{PLUGIN_SPEC_FILENAME}": _VALID_SPEC})
 
     def _unsupported(self: zipfile.ZipFile, name: str, *args: object, **kwargs: object) -> object:
         raise NotImplementedError("compression type 99 (AES)")

@@ -3,7 +3,7 @@
 import json
 from types import SimpleNamespace
 
-from tai_kit.utils.data.mcp_output_util import extract_tool_error, extract_tool_output, tool_has_error
+from tai42_kit.utils.data.mcp_output_util import extract_tool_error, extract_tool_output, tool_has_error
 
 
 def test_tool_has_error_dict_camel_and_snake():

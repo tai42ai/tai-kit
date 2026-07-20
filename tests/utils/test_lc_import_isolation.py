@@ -1,4 +1,4 @@
-"""Import lightness of the ``tai_kit.utils.lc`` package.
+"""Import lightness of the ``tai42_kit.utils.lc`` package.
 
 The package and its signature helpers must import on the bare install; only the
 lc_util re-exports pull ``langchain_core`` (the ``llm`` extra), resolved lazily
@@ -14,7 +14,7 @@ import textwrap
 
 import pytest
 
-from tai_kit.utils import lc
+from tai42_kit.utils import lc
 
 _BLOCK_LANGCHAIN = textwrap.dedent(
     """
@@ -39,8 +39,8 @@ def _run_without_langchain(child: str) -> subprocess.CompletedProcess[str]:
 def test_signature_util_imports_without_langchain():
     result = _run_without_langchain(
         """
-        from tai_kit.utils.lc import add_signature_params, exclude_fastmcp_ctx_from_kwargs
-        from tai_kit.utils.lc.signature_util import add_signature_params
+        from tai42_kit.utils.lc import add_signature_params, exclude_fastmcp_ctx_from_kwargs
+        from tai42_kit.utils.lc.signature_util import add_signature_params
 
         assert "langchain_core" not in sys.modules, sorted(m for m in sys.modules if "langchain" in m)
         """
@@ -54,21 +54,21 @@ def test_lc_util_reexport_raises_extra_hint_without_langchain():
     # (which getattr-with-default would swallow).
     result = _run_without_langchain(
         """
-        import tai_kit.utils.lc as lc
+        import tai42_kit.utils.lc as lc
 
         try:
             lc.mcp_tool_to_lc_tool
         except ModuleNotFoundError as exc:
             assert not isinstance(exc, AttributeError), type(exc)
-            assert "tai-kit[llm]" in str(exc), str(exc)
+            assert "tai42-kit[llm]" in str(exc), str(exc)
             assert exc.name == "langchain_core", exc.name
         else:
             raise SystemExit("expected ModuleNotFoundError, got the attribute")
 
         try:
-            from tai_kit.utils.lc import mcp_tools_to_lc_tools
+            from tai42_kit.utils.lc import mcp_tools_to_lc_tools
         except ModuleNotFoundError as exc:
-            assert "tai-kit[llm]" in str(exc), str(exc)
+            assert "tai42-kit[llm]" in str(exc), str(exc)
         else:
             raise SystemExit("expected ModuleNotFoundError, got the import")
         """
@@ -82,7 +82,7 @@ def test_lc_util_direct_import_raises_module_not_found_without_langchain():
     result = _run_without_langchain(
         """
         try:
-            import tai_kit.utils.lc.lc_util
+            import tai42_kit.utils.lc.lc_util
         except ModuleNotFoundError as exc:
             assert exc.name == "langchain_core", exc.name
         else:
@@ -93,7 +93,7 @@ def test_lc_util_direct_import_raises_module_not_found_without_langchain():
 
 
 def test_lazy_reexports_resolve_with_langchain_installed():
-    from tai_kit.utils.lc.lc_util import mcp_tool_to_lc_tool, mcp_tools_to_lc_tools
+    from tai42_kit.utils.lc.lc_util import mcp_tool_to_lc_tool, mcp_tools_to_lc_tools
 
     assert lc.mcp_tool_to_lc_tool is mcp_tool_to_lc_tool
     assert lc.mcp_tools_to_lc_tools is mcp_tools_to_lc_tools
@@ -122,7 +122,7 @@ def test_missing_langchain_is_translated_to_extra_hint(monkeypatch: pytest.Monke
         raise original
 
     monkeypatch.setattr(lc, "import_module", raise_missing)
-    with pytest.raises(ModuleNotFoundError, match=r"tai-kit\[llm\]") as excinfo:
+    with pytest.raises(ModuleNotFoundError, match=r"tai42-kit\[llm\]") as excinfo:
         lc.mcp_tool_to_lc_tool  # noqa: B018
     assert excinfo.value.__cause__ is original
 

@@ -11,9 +11,9 @@ from langchain_core.messages import AIMessage, AnyMessage, HumanMessage, RemoveM
 from langgraph.graph.message import REMOVE_ALL_MESSAGES
 from langgraph.runtime import Runtime
 
-from tai_kit.llm.middleware import context_overflow as co
-from tai_kit.llm.middleware import trimming as tr
-from tai_kit.llm.middleware.trimming import TrimmingMiddleware
+from tai42_kit.llm.middleware import context_overflow as co
+from tai42_kit.llm.middleware import trimming as tr
+from tai42_kit.llm.middleware.trimming import TrimmingMiddleware
 
 # before_model ignores the runtime (noqa ARG002); a default-constructed Runtime
 # satisfies the parameter type without needing a live graph execution context.

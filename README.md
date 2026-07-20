@@ -1,4 +1,4 @@
-# tai-kit
+# tai42-kit
 
 [![CI](https://github.com/tai42ai/tai-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/tai42ai/tai-kit/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
@@ -22,18 +22,18 @@ storage, and human-in-the-loop steps).
 Three packages; each depends only on the ones to its left:
 
 ```
-tai-contract  <--  tai-kit  <--  tai-skeleton
+tai42-contract  <--  tai42-kit  <--  tai42-skeleton
 (interfaces)      (helpers)     (the server)
 ```
 
-`tai-kit` obeys the leaf rule: its only tai-* dependency is `tai-contract`. It
+`tai42-kit` obeys the leaf rule: its only tai-* dependency is `tai42-contract`. It
 implements the contract's `BaseClient` Protocol and consumes its manifest types;
 among tai-* packages it depends on nothing else.
 
 ## Install
 
 Requires **Python 3.13+**. Nothing is on PyPI yet, so install from source. Clone
-this repo alongside `tai-contract` — this repo's `[tool.uv.sources]` points at
+this repo alongside `tai42-contract` — this repo's `[tool.uv.sources]` points at
 `../tai-contract` — then add it as an editable dependency of the environment
 that runs the server:
 
@@ -41,15 +41,15 @@ that runs the server:
 git clone https://github.com/tai42ai/tai-contract
 git clone https://github.com/tai42ai/tai-kit
 cd tai-skeleton   # or your own app checkout
-uv add --editable ../tai-kit   # once published: uv add tai-kit
+uv add --editable ../tai-kit   # once published: uv add tai42-kit
 ```
 
 Backends are gated behind extras, so install the ones you need — e.g. the
-pooled-client drivers `tai-kit[redis]`, `tai-kit[postgres]`, `tai-kit[curl]`, the
-checkpoint/store backends `tai-kit[langgraph-checkpoint-postgres]`,
-`tai-kit[langgraph-checkpoint-sqlite]`, and LLM-provider backends like
-`tai-kit[anthropic]`, `tai-kit[google]`, `tai-kit[mistral]`, `tai-kit[xai]`,
-`tai-kit[ollama]`, `tai-kit[huggingface]`.
+pooled-client drivers `tai42-kit[redis]`, `tai42-kit[postgres]`, `tai42-kit[curl]`, the
+checkpoint/store backends `tai42-kit[langgraph-checkpoint-postgres]`,
+`tai42-kit[langgraph-checkpoint-sqlite]`, and LLM-provider backends like
+`tai42-kit[anthropic]`, `tai42-kit[google]`, `tai42-kit[mistral]`, `tai42-kit[xai]`,
+`tai42-kit[ollama]`, `tai42-kit[huggingface]`.
 
 ## Development
 

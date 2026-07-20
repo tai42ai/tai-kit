@@ -6,9 +6,9 @@ from typing import cast
 
 import pytest
 
-from tai_kit.logging.logger import setup_logging
-from tai_kit.logging.settings import LoggingSettings
-from tai_kit.settings.base import TaiBaseSettings
+from tai42_kit.logging.logger import setup_logging
+from tai42_kit.logging.settings import LoggingSettings
+from tai42_kit.settings.base import TaiBaseSettings
 
 
 class _Cfg(TaiBaseSettings):

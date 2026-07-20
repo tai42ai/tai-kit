@@ -1,6 +1,6 @@
 import pytest
 
-from tai_kit.logging.settings import LoggingSettings
+from tai42_kit.logging.settings import LoggingSettings
 
 
 class TestLoggingSettingsLogLevel:

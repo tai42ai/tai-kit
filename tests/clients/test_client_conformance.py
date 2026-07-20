@@ -6,15 +6,15 @@ installed is skipped (mcp/http ride on base deps and always run)."""
 import importlib
 
 import pytest
-from tai_contract.clients import BaseClient
+from tai42_contract.clients import BaseClient
 
 CASES = [
-    ("tai_kit.clients.impl.http", "HttpxClient", "httpx"),
-    ("tai_kit.clients.impl.mcp", "FastMCPClient", "fastmcp"),
-    ("tai_kit.clients.impl.redis", "RedisClient", "redis"),
-    ("tai_kit.clients.impl.redis", "SyncRedisClient", "redis"),
-    ("tai_kit.clients.impl.curl", "CurlClient", "curl_cffi"),
-    ("tai_kit.clients.impl.postgres", "PostgresClient", "psycopg_pool"),
+    ("tai42_kit.clients.impl.http", "HttpxClient", "httpx"),
+    ("tai42_kit.clients.impl.mcp", "FastMCPClient", "fastmcp"),
+    ("tai42_kit.clients.impl.redis", "RedisClient", "redis"),
+    ("tai42_kit.clients.impl.redis", "SyncRedisClient", "redis"),
+    ("tai42_kit.clients.impl.curl", "CurlClient", "curl_cffi"),
+    ("tai42_kit.clients.impl.postgres", "PostgresClient", "psycopg_pool"),
 ]
 
 

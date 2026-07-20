@@ -3,8 +3,8 @@ caches clear before custom hooks run, and hooks see fresh values."""
 
 import pytest
 
-from tai_kit.settings import cache_registry
-from tai_kit.settings.cache_registry import (
+from tai42_kit.settings import cache_registry
+from tai42_kit.settings.cache_registry import (
     register_settings_reset,
     reset_all_settings,
     settings_cache,

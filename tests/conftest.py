@@ -21,7 +21,7 @@ import pytest
 # ``PG_`` / ``REDIS_`` cover the connection-settings field names;
 # ``MCP_CLIENT_`` covers the MCP connect/call timeouts; ``JQ_`` covers the jq
 # evaluation budget; ``TAI_URL_GUARD_`` covers the SSRF guard policy. Keep in
-# step with the ``env_prefix`` of every settings class under ``src/tai_kit``.
+# step with the ``env_prefix`` of every settings class under ``src/tai42_kit``.
 _SETTINGS_ENV_PREFIXES = (
     "LLM_",
     "EMBEDDING_",

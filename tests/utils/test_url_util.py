@@ -1,4 +1,4 @@
-from tai_kit.utils.data.url_util import build_url
+from tai42_kit.utils.data.url_util import build_url
 
 
 class TestBuildUrl:

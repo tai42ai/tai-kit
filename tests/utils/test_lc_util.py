@@ -10,7 +10,7 @@ pytest.importorskip("langchain_core")
 from fastmcp.client import Client
 from langchain_core.tools import StructuredTool
 
-from tai_kit.utils.lc.lc_util import mcp_tool_to_lc_tool, mcp_tools_to_lc_tools
+from tai42_kit.utils.lc.lc_util import mcp_tool_to_lc_tool, mcp_tools_to_lc_tools
 
 
 def _mcp_tool(name: str, description: str = "desc") -> mcp.types.Tool:
@@ -62,7 +62,7 @@ async def test_tool_coroutine_calls_client_call_tool():
 async def test_tool_call_passes_configured_call_timeout():
     # The built tool bounds each downstream call with the MCP client's configured
     # call timeout rather than fastmcp's default of None (wait forever).
-    from tai_kit.clients.settings import mcp_client_settings
+    from tai42_kit.clients.settings import mcp_client_settings
 
     client = _FakeClient()
     tool = mcp_tool_to_lc_tool(_as_client(client), _mcp_tool("search"))

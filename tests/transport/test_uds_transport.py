@@ -10,10 +10,10 @@ from contextlib import asynccontextmanager
 import httpx
 import pytest
 
-from tai_kit.transport import base_uds_transport as base
-from tai_kit.transport.base_uds_transport import SafeAsyncClient
-from tai_kit.transport.http_uds_transport import HTTPUDSTransport
-from tai_kit.transport.sse_uds_transport import SSEUDSTransport
+from tai42_kit.transport import base_uds_transport as base
+from tai42_kit.transport.base_uds_transport import SafeAsyncClient
+from tai42_kit.transport.http_uds_transport import HTTPUDSTransport
+from tai42_kit.transport.sse_uds_transport import SSEUDSTransport
 
 
 async def test_safe_async_client_swallows_invalid_state_error(monkeypatch):
@@ -109,7 +109,7 @@ async def _drive_connect_session(monkeypatch, transport, client_factory_name):
 
 
 async def test_http_connect_session_uses_streamable_client(monkeypatch):
-    import tai_kit.transport.http_uds_transport as http_mod
+    import tai42_kit.transport.http_uds_transport as http_mod
 
     captured = await _drive_connect_session(
         monkeypatch, HTTPUDSTransport(socket_path="/tmp/s.sock"), (http_mod, "streamablehttp_client")
@@ -120,7 +120,7 @@ async def test_http_connect_session_uses_streamable_client(monkeypatch):
 
 
 async def test_sse_connect_session_uses_sse_client(monkeypatch):
-    import tai_kit.transport.sse_uds_transport as sse_mod
+    import tai42_kit.transport.sse_uds_transport as sse_mod
 
     captured = await _drive_connect_session(
         monkeypatch, SSEUDSTransport(socket_path="/tmp/s.sock"), (sse_mod, "sse_client")

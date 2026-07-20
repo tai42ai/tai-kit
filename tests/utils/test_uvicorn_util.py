@@ -1,6 +1,6 @@
 import pytest
 
-from tai_kit.utils.runtime.uvicorn_util import _is_value_token, parse_and_validate_uvicorn_args
+from tai42_kit.utils.runtime.uvicorn_util import _is_value_token, parse_and_validate_uvicorn_args
 
 
 class TestIsValueToken:

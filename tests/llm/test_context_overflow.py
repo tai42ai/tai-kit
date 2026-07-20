@@ -15,12 +15,12 @@ from langchain.agents.middleware.context_editing import ClearToolUsesEdit
 from langchain.agents.middleware.summarization import DEFAULT_SUMMARY_PROMPT
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 
-from tai_kit.llm.middleware import context_overflow as co
-from tai_kit.llm.middleware.context_overflow import (
+from tai42_kit.llm.middleware import context_overflow as co
+from tai42_kit.llm.middleware.context_overflow import (
     areduce_context,
     context_overflow_middlewares,
 )
-from tai_kit.llm.middleware.trimming import TrimmingMiddleware
+from tai42_kit.llm.middleware.trimming import TrimmingMiddleware
 
 
 def _summary_model(text: str = "SUMMARY") -> MagicMock:

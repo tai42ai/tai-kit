@@ -15,7 +15,7 @@ import pytest
 
 pytest.importorskip("redis")
 
-from tai_kit.clients.impl.redis import hgetall, hset_mapping, scan_iter
+from tai42_kit.clients.impl.redis import hgetall, hset_mapping, scan_iter
 
 if TYPE_CHECKING:
     from redis.asyncio import Redis as AsyncRedis

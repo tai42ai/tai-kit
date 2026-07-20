@@ -4,9 +4,9 @@ import pytest
 
 pytest.importorskip("jq")
 
-from tai_kit.settings.cache_registry import reset_all_settings
-from tai_kit.utils.data import jq_util
-from tai_kit.utils.data.jq_util import get_compiled_jq, run_jq_first
+from tai42_kit.settings.cache_registry import reset_all_settings
+from tai42_kit.utils.data import jq_util
+from tai42_kit.utils.data.jq_util import get_compiled_jq, run_jq_first
 
 
 class TestGetCompiledJq:

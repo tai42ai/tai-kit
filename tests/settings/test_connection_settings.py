@@ -7,7 +7,7 @@ from urllib.parse import parse_qs, unquote, urlsplit
 import pytest
 from pydantic import SecretStr, ValidationError
 
-from tai_kit.clients.settings import PostgresConnectionSettings, RedisConnectionSettings
+from tai42_kit.clients.settings import PostgresConnectionSettings, RedisConnectionSettings
 
 
 class TestRedisConnectionSettings:

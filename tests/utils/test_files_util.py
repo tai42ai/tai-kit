@@ -1,7 +1,7 @@
 """files_util.url_to_filelike: download a URL into a named in-memory file.
 
 The default (no injected client) path fetches through
-:func:`tai_kit.net.fetch_url`, so it inherits the SSRF guard at full strength.
+:func:`tai42_kit.net.fetch_url`, so it inherits the SSRF guard at full strength.
 The injected-client path defaults to a transport-independent pre-flight
 (``guard=True``): the URL host is resolved and validated before the download,
 and the streamed body is size-capped per chunk; ``guard=False`` is the explicit
@@ -17,10 +17,10 @@ from typing import cast
 import pytest
 from httpx import AsyncClient, HTTPStatusError, Request, Response
 
-from tai_kit.net import url_guard
-from tai_kit.net.url_guard import UrlGuardError, UrlGuardSettings
-from tai_kit.utils.runtime import files_util
-from tai_kit.utils.runtime.files_util import url_to_filelike
+from tai42_kit.net import url_guard
+from tai42_kit.net.url_guard import UrlGuardError, UrlGuardSettings
+from tai42_kit.utils.runtime import files_util
+from tai42_kit.utils.runtime.files_util import url_to_filelike
 
 
 class _FakeResponse:

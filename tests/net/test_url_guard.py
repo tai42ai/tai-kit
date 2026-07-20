@@ -11,8 +11,8 @@ from typing import Any
 
 import pytest
 
-from tai_kit.net import url_guard
-from tai_kit.net.url_guard import UrlGuardError, UrlGuardSettings
+from tai42_kit.net import url_guard
+from tai42_kit.net.url_guard import UrlGuardError, UrlGuardSettings
 
 
 def _enable(monkeypatch: pytest.MonkeyPatch, **kwargs: Any) -> UrlGuardSettings:

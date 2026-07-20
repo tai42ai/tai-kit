@@ -2,10 +2,10 @@
 the transport for the selected wire protocol."""
 
 import pytest
-from tai_contract.manifest import MCPConfig, TaiMCPConfig
-from tai_contract.transport import Transport
+from tai42_contract.manifest import MCPConfig, TaiMCPConfig
+from tai42_contract.transport import Transport
 
-from tai_kit.transport import HTTPUDSTransport, SSEUDSTransport, get_mcp_transport
+from tai42_kit.transport import HTTPUDSTransport, SSEUDSTransport, get_mcp_transport
 
 
 def test_uds_transports_satisfy_contract_protocol():

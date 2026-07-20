@@ -1,15 +1,15 @@
-# Contributing to tai-kit
+# Contributing to tai42-kit
 
-`tai-kit` is generic leaf code: helpers, settings, pooled clients, and LLM/AI
+`tai42-kit` is generic leaf code: helpers, settings, pooled clients, and LLM/AI
 factories. The hard rule (the leaf rule): **its only tai-* dependency is
-`tai-contract`** — it implements the contract's `BaseClient` Protocol and
+`tai42-contract`** — it implements the contract's `BaseClient` Protocol and
 consumes its manifest types; among tai-* packages it imports nothing else.
 
 ## Ground rules
 
-- **Among tai-* packages, import `tai_contract` only.** No other tai-* package:
+- **Among tai-* packages, import `tai42_contract` only.** No other tai-* package:
   ```bash
-  grep -rnE '(from|import)\s+tai_' src/ | grep -v tai_contract   # only tai_kit lines
+  grep -rnE '(from|import)\s+tai_' src/ | grep -v tai42_contract   # only tai42_kit lines
   ```
 - **Optional backends stay optional.** LLM providers, checkpoint/store backends,
   and pooled-client drivers (`redis` / `curl` / `postgres`) are
@@ -28,7 +28,7 @@ consumes its manifest types; among tai-* packages it imports nothing else.
 - `net` — the SSRF url guard + the pinned `fetch_url` download (server-side URL fetches)
 - `transport` — UDS MCP transports + `get_mcp_transport`
 - `settings` — settings machinery (base + cache registry + self-registering schema registry); `logging` — logging settings + setup
-- `plugins` — `tai-plugin.yml` spec loading: hardened YAML parsing + validation against the `tai_contract.plugins.PluginSpec` schema
+- `plugins` — `tai-plugin.yml` spec loading: hardened YAML parsing + validation against the `tai42_contract.plugins.PluginSpec` schema
 
 ## Dev
 

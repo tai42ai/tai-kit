@@ -1,4 +1,4 @@
-"""Tests for :mod:`tai_kit.net.jwt` driven against a real loopback OIDC issuer.
+"""Tests for :mod:`tai42_kit.net.jwt` driven against a real loopback OIDC issuer.
 
 RSA keypairs are generated in-test via joserfc and the issuer's discovery + JWKS
 are served by the ``oidc_server`` fixture, so the whole suite runs with zero real
@@ -16,7 +16,7 @@ import pytest
 from joserfc import jwt as joserfc_jwt
 from joserfc.jwk import RSAKey
 
-from tai_kit.net.jwt import (
+from tai42_kit.net.jwt import (
     JwksCache,
     JwksFetchError,
     JwtVerifyError,

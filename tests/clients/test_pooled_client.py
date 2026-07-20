@@ -2,7 +2,7 @@
 
 import asyncio
 
-from tai_kit.clients import ClientSettings, PooledClient, client_ctx, shutdown_all_clients
+from tai42_kit.clients import ClientSettings, PooledClient, client_ctx, shutdown_all_clients
 
 
 def _make_client_cls():

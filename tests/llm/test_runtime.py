@@ -11,13 +11,13 @@ from pydantic import BaseModel, ValidationError
 
 pytest.importorskip("langgraph")
 
-from tai_kit.llm.runtime import (
+from tai42_kit.llm.runtime import (
     build_agent_input,
     build_user_output,
     extract_structured_output,
     validate_structured_output,
 )
-from tai_kit.utils.data.json_schema_util import InvalidJsonSchemaError, JsonSchemaValidationError
+from tai42_kit.utils.data.json_schema_util import InvalidJsonSchemaError, JsonSchemaValidationError
 
 
 def test_build_agent_input_plain_user_messages():

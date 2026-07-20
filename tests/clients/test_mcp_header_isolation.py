@@ -13,9 +13,9 @@ from typing import Any, cast
 from fastmcp import Client
 from fastmcp.client.transports.http import StreamableHttpTransport
 from fastmcp.client.transports.sse import SSETransport
-from tai_contract.manifest import MCPConfig, TaiMCPConfig
+from tai42_contract.manifest import MCPConfig, TaiMCPConfig
 
-from tai_kit.transport import get_mcp_transport
+from tai42_kit.transport import get_mcp_transport
 
 
 def _resolved_transport(cfg: TaiMCPConfig) -> Any:
