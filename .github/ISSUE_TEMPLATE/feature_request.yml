@@ -1,0 +1,19 @@
+name: Feature request
+description: Propose an addition or change to tai42-kit
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What should be added or changed, and what problem does it solve? Remember the leaf rule — tai42-kit's only tai-* dependency is tai42-contract, and optional backends stay behind extras.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: tai42-kit version
+      description: The version you are using, if relevant.
+      placeholder: "0.1.1"
+    validations:
+      required: false
