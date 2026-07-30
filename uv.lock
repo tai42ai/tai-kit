@@ -3089,7 +3089,7 @@ wheels = [
 
 [[package]]
 name = "tai42-kit"
-version = "0.2.0"
+version = "0.2.1"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },
@@ -3258,7 +3258,7 @@ requires-dist = [
     { name = "ruamel-yaml", specifier = ">=0.18" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },
     { name = "sentence-transformers", marker = "extra == 'huggingface'", specifier = ">=5.3" },
-    { name = "tai42-contract", specifier = ">=0.2,<0.3" },
+    { name = "tai42-contract", specifier = ">=0.2,<0.4" },
     { name = "tai42-kit", extras = ["llm"], marker = "extra == 'anthropic'" },
     { name = "tai42-kit", extras = ["llm"], marker = "extra == 'google'" },
     { name = "tai42-kit", extras = ["llm"], marker = "extra == 'huggingface'" },
